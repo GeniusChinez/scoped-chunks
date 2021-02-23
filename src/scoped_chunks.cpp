@@ -1,7 +1,7 @@
 #pragma once
-#include "smem.h"
+#include "scoped_chunks.h"
 
-namespace smem {
+namespace gc {
     template <typename T, typename ...Args> 
     T* ScopedChunks::new_item(Args&&... args) {
         allocations.push_back(std::malloc(sizeof(T)));

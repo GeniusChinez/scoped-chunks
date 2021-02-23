@@ -1,8 +1,8 @@
-#include "smem.cpp"
+#include "scoped_chunks.cpp"
 #include <iostream>
 
 int main() {
-    auto chunks = smem::get_scoped_chunks();
+    auto chunks = gc::get_scoped_chunks();
 
     auto temp_a = chunks.new_item<int>(3);
     auto temp_b = static_cast<int*>(chunks.allocate_bytes(23));

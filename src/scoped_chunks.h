@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <vector>
 
-namespace smem {
+namespace gc {
     class ScopedChunks {
     public:
         ScopedChunks() = default;
