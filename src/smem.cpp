@@ -18,8 +18,15 @@ namespace smem {
     }
 
     Arena::~Arena() {
-        for (auto location : allocations) {
-            std::free(location);
+        for (auto& allocation : allocations) {
+            std::free(&allocation);
+        }
+    }
+
+    void Arena::free(void** buffer_ptr) {
+        if (*buffer_ptr != NULL) {
+            std::free(*buffer_ptr);
+            *buffer_ptr = NULL;
         }
     }
 

@@ -22,6 +22,8 @@ namespace smem {
 
         std::size_t count_allocations() const;
 
+        void free(void**);
+
     private:
         std::vector<void*> allocations;
     };
