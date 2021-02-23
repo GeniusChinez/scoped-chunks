@@ -4,14 +4,14 @@
 #include <vector>
 
 namespace smem {
-    class Arena {
+    class MemoryGuard {
     public:
-        Arena() = default;
-        Arena(const Arena&) = delete;
-        Arena(Arena&&) = delete;
-        Arena& operator=(const Arena&) = delete;
-        Arena& operator=(Arena&&) = delete;
-        ~Arena();
+        MemoryGuard() = default;
+        MemoryGuard(const MemoryGuard&) = delete;
+        MemoryGuard(MemoryGuard&&) = delete;
+        MemoryGuard& operator=(const MemoryGuard&) = delete;
+        MemoryGuard& operator=(MemoryGuard&&) = delete;
+        ~MemoryGuard();
 
         template <typename T, typename ...Args> 
         [[nodiscard]]
@@ -27,4 +27,6 @@ namespace smem {
     private:
         std::vector<void*> allocations;
     };
+
+    using memory_guard_t = MemoryGuard;
 }

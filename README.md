@@ -1,6 +1,6 @@
 # smem
 A c++ tool to automatically handle allocated memory buffers that have roughly 
-the same lifetime. All the allocated memory is freed once the arena goes out 
+the same lifetime. All the allocated memory is freed once the guard goes out 
 of scope.
 
 ### Usage:
@@ -9,7 +9,7 @@ of scope.
 #include <iostream>
 
 int main() {
-    auto arena = smem::create_arena();
+    auto arena = smem::create_memory_guard();
 
     auto temp_a = arena.new_item<int>(3);
     auto temp_b = static_cast<int*>(arena.allocate_bytes(23));
