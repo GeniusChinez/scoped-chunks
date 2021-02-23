@@ -19,7 +19,7 @@ namespace smem {
 
     ScopedChunks::~ScopedChunks() {
         for (auto& allocation : allocations) {
-            std::free(&allocation);
+            free(&allocation);
         }
     }
 
