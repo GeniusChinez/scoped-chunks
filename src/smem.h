@@ -4,14 +4,14 @@
 #include <vector>
 
 namespace smem {
-    class MemoryGuard {
+    class ScopedChunks {
     public:
-        MemoryGuard() = default;
-        MemoryGuard(const MemoryGuard&) = delete;
-        MemoryGuard(MemoryGuard&&) = delete;
-        MemoryGuard& operator=(const MemoryGuard&) = delete;
-        MemoryGuard& operator=(MemoryGuard&&) = delete;
-        ~MemoryGuard();
+        ScopedChunks() = default;
+        ScopedChunks(const ScopedChunks&) = delete;
+        ScopedChunks(ScopedChunks&&) = delete;
+        ScopedChunks& operator=(const ScopedChunks&) = delete;
+        ScopedChunks& operator=(ScopedChunks&&) = delete;
+        ~ScopedChunks();
 
         template <typename T, typename ...Args> 
         [[nodiscard]]
@@ -28,5 +28,5 @@ namespace smem {
         std::vector<void*> allocations;
     };
 
-    using memory_guard_t = MemoryGuard;
+    using scoped_chunks_t = ScopedChunks;
 }

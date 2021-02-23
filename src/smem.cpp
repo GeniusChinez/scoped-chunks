@@ -3,34 +3,34 @@
 
 namespace smem {
     template <typename T, typename ...Args> 
-    T* MemoryGuard::new_item(Args&&... args) {
+    T* ScopedChunks::new_item(Args&&... args) {
         allocations.push_back(std::malloc(sizeof(T)));
         return new (allocations.back()) T(std::forward<Args>(args)...);
     }
 
-    void* MemoryGuard::allocate_bytes(std::size_t nbytes=1) {
+    void* ScopedChunks::allocate_bytes(std::size_t nbytes=1) {
         allocations.push_back(std::malloc(nbytes));
         return static_cast<void*>(allocations.back());
     }
 
-    std::size_t MemoryGuard::count_allocations() const {
+    std::size_t ScopedChunks::count_allocations() const {
         return allocations.size();
     }
 
-    MemoryGuard::~MemoryGuard() {
+    ScopedChunks::~ScopedChunks() {
         for (auto& allocation : allocations) {
             std::free(&allocation);
         }
     }
 
-    void MemoryGuard::free(void** buffer_ptr) {
+    void ScopedChunks::free(void** buffer_ptr) {
         if (*buffer_ptr != NULL) {
             std::free(*buffer_ptr);
             *buffer_ptr = NULL;
         }
     }
 
-    MemoryGuard create_memory_guard() {
-        return MemoryGuard();
+    ScopedChunks get_scoped_chunks() {
+        return ScopedChunks();
     }
 }
